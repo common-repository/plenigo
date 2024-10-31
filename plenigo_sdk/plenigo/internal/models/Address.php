@@ -1,0 +1,150 @@
+<?php
+
+namespace plenigo\internal\models;
+
+/**
+ * Address
+ *
+ * <p>
+ * User Data model that mirrors the information provided by
+ * the plenigo REST API.
+ * </p>
+ *
+ * @category SDK
+ * @package  PlenigoInternalModels
+ * @author   René Olivo <r.olivo@plenigo.com>
+ * @link     https://www.plenigo.com
+ */
+class Address
+{
+    /**
+     * The address' street.
+     */
+    private $street;
+
+    /**
+     * More address information / second line.
+     */
+    private $additionalAddressInfo;
+
+    /**
+     * The address' post code.
+     */
+    private $postCode;
+
+    /**
+     * The address' city.
+     */
+    private $city;
+
+    /**
+     * The address' country.
+     */
+    private $country;
+
+    /**
+     * The default constructor with all required parameters.
+     *
+     * @param string $street                The address' street.
+     * @param string $additionalAddressInfo More address information.
+     * @param string $postCode              The address' post code.
+     * @param string $city                  The address' city.
+     * @param string $country               The address' country.
+     *
+     * @return Address instance
+     */
+    public function __construct($street, $additionalAddressInfo, $postCode, $city, $country)
+    {
+        $this->street                   = $street;
+        $this->additionalAddressInfo    = $additionalAddressInfo;
+        $this->postCode                 = $postCode;
+        $this->city                     = $city;
+        $this->country                  = $country;
+    }
+
+    /**
+     * Gets the address' street.
+     *
+     * @return string The address' street.
+     */
+    public function getStreet()
+    {
+        return $this->street;
+    }
+
+    /**
+     * Gets the address' additional information.
+     *
+     * @return string The address' additional information.
+     */
+    public function getAdditionalAddressInfo()
+    {
+        return $this->additionalAddressInfo;
+    }
+
+    /**
+     * Gets the address' post code.
+     *
+     * @return string The address' post code.
+     */
+    public function getPostCode()
+    {
+        return $this->postCode;
+    }
+
+    /**
+     * Gets the address' city.
+     *
+     * @return string The address' city.
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    /**
+     * Gets the address' country.
+     *
+     * @return string The address' country.
+     */
+    public function getCountry()
+    {
+        return $this->country;
+    }
+
+    /**
+     * Generates a map from the Address instance properties.
+     *
+     * @return array A map with the instance properties.
+     */
+    public function getMap()
+    {
+        $map = array(
+            'street'                   => $this->getStreet(),
+            'additionalAddressInfo'    => $this->getAdditionalAddressInfo(),
+            'postCode'                 => $this->getPostCode(),
+            'city'                     => $this->getCity(),
+            'country'                  => $this->getCountry()
+        );
+
+        return $map;
+    }
+
+    /**
+     * Creates an Address instance using properties defined inside a map.
+     *
+     * @param array $map The map of properties to create the Address instance.
+     *
+     * @return Address The Address instance.
+     */
+    public static function createFromMap(array $map)
+    {
+        $street = isset($map['street']) ? $map['street'] : null;
+        $additionalAddressInfo = isset($map['additionalAddressInfo']) ? $map['additionalAddressInfo'] : null;
+        $postCode = isset($map['postCode']) ? $map['postCode'] : null;
+        $city = isset($map['city']) ? $map['city'] : null;
+        $country = isset($map['country']) ? $map['country'] : null;
+
+        return new Address($street, $additionalAddressInfo, $postCode, $city, $country);
+    }
+}
